@@ -1,6 +1,6 @@
 <?php
-  $inicio = true;
-  include 'includes/templates/header.php';
+  require 'includes/funciones.php';
+  incluirTemplate('header',$inicio=true);
 ?>
 
   <main class="contenedor seccion">
@@ -197,18 +197,8 @@
         <p>-Bruno Bettio</p>
       </div>
     </section>
-  </div>
-  <footer class="footer seccion">
-    <div class="contenedor contenedor-footer">
-      <div class="navegacion">
-        <a href="nosotros.php">Nosotros</a>
-        <a href="anuncios.php">Anuncios</a>
-        <a href="blog.php">Blog</a>
-        <a href="contacto.php">Contacto</a>
-      </div>
-    </div>
-    <p class="copyright">Todos los derechos reservados 2024 &copy;</p>
-  </footer>
-  <script src="build/js/bundle.min.js"></script>
-</body>
-</html>
+</div>
+
+<?php
+  incluirTemplate('footer');
+?>
