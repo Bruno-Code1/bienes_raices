@@ -1,34 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bienes Raíces</title>
-  <link rel="stylesheet" href="build/css/app.css">
-</head>
-<body>
-  <header class="header inicio">
-    <div class="contenedor contenido-header">
-      <div class="barra">
-        <a href="/">
-          <img src="build/img/logo.svg" alt="Logotipo de Bienes Raices">
-        </a>
-        <div class="mobile-menu">
-          <img src="build/img/barras.svg" alt="icono menu responsive">
-        </div>
-        <div class="derecha">
-          <img src="build/img/dark-mode.svg" alt="icono luna" class="dark-mode-boton">
-          <div class="navegacion">
-            <a href="nosotros.html">Nosotros</a>
-            <a href="anuncios.html">Anuncios</a>
-            <a href="blog.html">Blog</a>
-            <a href="contacto.html">Contacto</a>
-          </div>
-        </div>
-      </div><!--.barra-->
-      <h1>Venta de Casas y Departamentos Exclusivos de Lujo</h1>
-    </div>
-  </header>
+<?php
+  $inicio = true;
+  include 'includes/templates/header.php';
+?>
+
   <main class="contenedor seccion">
     <h1>Más Sobre Nosotros</h1>
     <div class="iconos-nosotros">
@@ -79,7 +53,7 @@
               <p>4</p>
             </li>
           </ul>
-          <a href="anuncio.html" class="boton-amarillo-block">
+          <a href="anuncio.php" class="boton-amarillo-block">
             Ver Propiedad
           </a>
         </div><!--.contenido-anuncio-->
@@ -108,7 +82,7 @@
               <p>4</p>
             </li>
           </ul>
-          <a href="anuncio.html" class="boton-amarillo-block">
+          <a href="anuncio.php" class="boton-amarillo-block">
             Ver Propiedad
           </a>
         </div><!--.contenido-anuncio-->
@@ -137,20 +111,20 @@
               <p>4</p>
             </li>
           </ul>
-          <a href="anuncio.html" class="boton-amarillo-block">
+          <a href="anuncio.php" class="boton-amarillo-block">
             Ver Propiedad
           </a>
         </div><!--.contenido-anuncio-->
       </div><!--.anuncio-->
     </div><!--.contenedor-anuncios-->
     <div class="alinear-derecha">
-      <a href="anuncios.html" class="boton boton-verde">Ver Todas</a>
+      <a href="anuncios.php" class="boton boton-verde">Ver Todas</a>
     </div>
   </section>
   <section class="imagen-contacto">
     <h2>Encuentra la casa de tus sueños</h2>
     <p>Llena el formulario de contacto y un asesor se pondrá en contacto contigo a la brevedad</p>
-    <a href="contacto.html" class="boton-amarillo">Contáctanos</a>
+    <a href="contacto.php" class="boton-amarillo">Contáctanos</a>
   </section>
   <div class="contenedor seccion seccion-inferior">
     <section class="blog">
@@ -164,7 +138,7 @@
           </picture>
         </div>
         <div class="texto-entrada">
-          <a href="entrada.html">
+          <a href="entrada.php">
             <h4>Terraza en el techo de tu casa</h4>
             <p class="informacion-meta">Escrito el: <span>20/10/2021</span> por: <span>Admin</span></p>
             <p>
@@ -183,7 +157,7 @@
           </picture>
         </div>
         <div class="texto-entrada">
-          <a href="entrada.html">
+          <a href="entrada.php">
             <h4>Guía para la decoración de tu hogar</h4>
             <p class="informacion-meta">Escrito el: <span>20/10/2021</span> por: <span>Admin</span></p>
             <p>
@@ -202,7 +176,7 @@
           </picture>
         </div>
         <div class="texto-entrada">
-          <a href="entrada.html">
+          <a href="entrada.php">
             <h4>Terraza en el techo de tu casa</h4>
             <p class="informacion-meta">Escrito el: <span>20/10/2021</span> por: <span>Admin</span></p>
             <p>
@@ -227,10 +201,10 @@
   <footer class="footer seccion">
     <div class="contenedor contenedor-footer">
       <div class="navegacion">
-        <a href="nosotros.html">Nosotros</a>
-        <a href="anuncios.html">Anuncios</a>
-        <a href="blog.html">Blog</a>
-        <a href="contacto.html">Contacto</a>
+        <a href="nosotros.php">Nosotros</a>
+        <a href="anuncios.php">Anuncios</a>
+        <a href="blog.php">Blog</a>
+        <a href="contacto.php">Contacto</a>
       </div>
     </div>
     <p class="copyright">Todos los derechos reservados 2024 &copy;</p>
