@@ -1,0 +1,17 @@
+{
+    "name": "betti/bienes_raices",
+    "description": "Creando un proyecto con POO",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bruno Bettio",
+            "email": "bruno.web.bpage@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\":"./classes"
+        }
+    }
+}
