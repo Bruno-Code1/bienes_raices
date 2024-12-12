@@ -8,7 +8,9 @@
             "email": "bruno.web.bpage@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "intervention/image": "^3.9"
+    },
     "autoload": {
         "psr-4": {
             "App\\":"./classes"

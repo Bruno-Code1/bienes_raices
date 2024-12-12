@@ -3,6 +3,8 @@
   require '../../includes/app.php';
   
   use App\Propiedad;
+  use Intervention\Image\Drivers\Gd\Driver;
+  use Intervention\Image\ImageManager as Image;
 
   estaAutenticado();
 
@@ -13,7 +15,7 @@
   $resultado = mysqli_query($db,$consulta);
 
   // Arreglo con mensajes de errores
-  $errores = [];
+  $errores = Propiedad::getErrores();
 
   $titulo='';
   $precio='';
@@ -28,79 +30,27 @@
     
     $propiedad = new Propiedad($_POST);
 
-    $propiedad->guardar();
-
-    // echo "<pre>";
-    // var_dump($_POST);
-    // echo "</pre>";
-  
-
-    $titulo=mysqli_real_escape_string($db,$_POST['titulo']);
-    $precio=mysqli_real_escape_string($db,$_POST['precio']);
-    $descripcion=mysqli_real_escape_string($db,$_POST['descripcion']);
-    $habitaciones=mysqli_real_escape_string($db,$_POST['habitaciones']);
-    $wc=mysqli_real_escape_string($db,$_POST['wc']);
-    $estacionamiento=mysqli_real_escape_string($db,$_POST['estacionamiento']);
-    $vendedores_id=mysqli_real_escape_string($db,$_POST['vendedores_id']);
-    $creado=date('Y/m/d');
-
-    // Asignar files hacia una variable
-    $imagen = $_FILES['imagen'];
-
-    if(!$titulo) {
-      $errores[] = "Debes añadir un titulo";
-    }
-    if(!$precio) {
-      $errores[] = "El precio es obligatorio";
-    }
-    if(strlen($descripcion)<50) {
-      $errores[] = "La descripción es obligatoria y debe tener al menos 50 caracteres";
-    }
-    if(!$habitaciones) {
-      $errores[] = "El número de habitaciones es obligatorio";
-    }
-    if(!$wc) {
-      $errores[] = "El número de baños es obligatorio";
-    }
-    if(!$estacionamiento) {
-      $errores[] = "El número de lugares estacionamiento es obligatorio";
-    }
-    if(!$vendedores_id) {
-      $errores[] = "Elige un vendedor";
-    }
-    if(!$imagen['name'] || $imagen['error']) {
-      $errores[] = "La imagen es obligatoria";
+    // Generar un nombre único
+    $nombreImagen = md5( uniqid( rand(), true ) ) . ".jpg";
+    if($_FILES['imagen']['tmp_name']) {
+      $manager = new Image(Driver::class);
+      $imagen = $manager->read($_FILES['imagen']['tmp_name'])->cover(800,600);
+      $propiedad->setImagen($nombreImagen);
     }
 
-    // Validar por tamaño (1000 kb máx)
-    $medida = 1000 * 1000;
-    if($imagen['size'] > $medida) {
-      $errores[] = "La imagen es muy pesada";
-    }
-    echo "<pre>";
-    var_dump($errores);
-    echo "</pre>";
+    $errores = $propiedad->validar();
 
-    //  Revisar que el arreglo de errores esté vacío
     if(empty($errores)) {
-      // Subida de archivos
-
-      // Crear carpeta
-      $carpetaImagenes = '../../imagenes/';
-
-      if(!is_dir($carpetaImagenes)) {
-        mkdir($carpetaImagenes);
+      /* SUBIDA DE ARCHIVOS */
+     
+      if(!is_dir(CARPETA_IMAGENES)) {
+        mkdir(CARPETA_IMAGENES);
       }
 
-      // Generar un nombre único
-      $nombreImagen = md5( uniqid( rand(), true ) ) . ".jpg";
+      // Guarda la imagen en el servidor
+      $imagen->save(CARPETA_IMAGENES . $nombreImagen);
 
-      // Subir la imagen
-      move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . $nombreImagen);      
-
-      // echo $query;
-      $resultado = mysqli_query($db,$query);
-
+      $resultado = $propiedad->guardar();
       if($resultado) {
         // Redireccionar al usuario.
         header("Location: /admin?resultado=1");
